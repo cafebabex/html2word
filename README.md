@@ -42,6 +42,9 @@ html转word
 
 官网地址：
 `https://www.e-iceblue.cn/`
+iceblue除了html转换word之外，几乎所有的office产品之间个的格式转换都是支持的。有兴趣的读者可以去官网自行研究
+源码地址
+`https://github.com/eiceblue/Spire.PDF-for-Java`
 
 ##单元测试
 >读者可以试着运行一下
