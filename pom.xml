@@ -19,6 +19,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.18</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>fluent-hc</artifactId>
+            <version>4.5.13</version>
+        </dependency>
         <!--解析html工具类-->
         <dependency>
             <groupId>org.jsoup</groupId>

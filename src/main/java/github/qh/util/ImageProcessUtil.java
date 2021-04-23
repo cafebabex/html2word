@@ -1,6 +1,7 @@
 package github.qh.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.fluent.Request;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,15 +28,20 @@ public class ImageProcessUtil {
 
     }
 
+    /**
+     * 处理word中过大的图片，调整到适配a4纸的页面大小，参数可以通过上面两个值调整
+     * @param content 导出文本
+     * @return 调整后的文本
+     */
     public static String processImage(String content) {
         Document parse = Jsoup.parse(content);
         Elements elements = parse.select("img");
         elements.forEach(
                 element -> {
                     String url = element.attr("src");
-                    InputStream image = null;
                     BufferedImage sourceImg = null;
                     try {
+                        InputStream image = Request.Get(url).execute().returnContent().asStream();
                         sourceImg = ImageIO.read(image);
                         BigDecimal width = BigDecimal.valueOf(sourceImg.getWidth());
                         BigDecimal height = BigDecimal.valueOf(sourceImg.getHeight());
