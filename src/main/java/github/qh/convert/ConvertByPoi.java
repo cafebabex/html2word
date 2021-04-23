@@ -1,13 +1,12 @@
 package github.qh.convert;
 
+import github.qh.convert.api.Html2Word;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.poifs.filesystem.DirectoryEntry;
-import org.apache.poi.poifs.filesystem.DocumentEntry;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
-import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @author qu.hao
@@ -15,35 +14,28 @@ import java.nio.charset.StandardCharsets;
  * @email quhao.mi@foxmail.com
  */
 @Slf4j
-public class ConvertByPoi {
+public class ConvertByPoi implements Html2Word {
 
-    /**
-     * 文本内容
-     */
-    private final String context;
+    private final InputStream inputStream;
 
-    /**
-     * 文件名称
-     */
-    private final String fileName;
+    private final OutputStream outputStream;
 
-    public ConvertByPoi(String context, String fileName) {
-        this.context = context;
-        this.fileName = fileName;
+    public ConvertByPoi(InputStream inputStream, OutputStream outputStream) {
+        this.inputStream = inputStream;
+        this.outputStream = outputStream;
     }
 
-    public void convert(OutputStream outputStream) {
+    @Override
+    public void convert() {
         try (POIFSFileSystem poifsFileSystem = new POIFSFileSystem()) {
             //这里是必须要设置编码的，不然导出中文就会乱码。
-            byte[] b = context.getBytes(StandardCharsets.UTF_8);
             //将字节数组包装到流中
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(b);
             DirectoryEntry directory = poifsFileSystem.getRoot();
-            directory.createDocument(fileName, inputStream);
+            directory.createDocument("", inputStream);
             poifsFileSystem.writeFilesystem(outputStream);
 
-            inputStream.close();
             outputStream.close();
+            inputStream.close();
         } catch (Exception e) {
             log.error("导出失败", e);
         }
