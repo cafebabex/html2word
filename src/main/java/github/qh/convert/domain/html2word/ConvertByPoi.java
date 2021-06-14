@@ -1,4 +1,4 @@
-package github.qh.convert;
+package github.qh.convert.domain.html2word;
 
 import github.qh.convert.api.Html2Word;
 import lombok.extern.slf4j.Slf4j;

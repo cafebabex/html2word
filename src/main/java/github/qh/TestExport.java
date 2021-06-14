@@ -1,8 +1,8 @@
 package github.qh;
 
 import github.qh.context.HtmlText;
-import github.qh.convert.ConvertByIceBlue;
-import github.qh.convert.ConvertByPoi;
+import github.qh.convert.domain.html2word.ConvertByIceBlue;
+import github.qh.convert.domain.html2word.ConvertByPoi;
 import github.qh.convert.api.Html2Word;
 import github.qh.util.ImageProcessUtil;
 import lombok.extern.slf4j.Slf4j;
